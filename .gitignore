@@ -168,3 +168,7 @@ docs/
 
 #hist
 .history/
+
+#junit results
+e2e/junit/
+junit/
