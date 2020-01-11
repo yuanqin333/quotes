@@ -20,5 +20,26 @@ steps:
     npm install
     npm audit fix
     ng config -g cli.warnings.versionMismatch false
-    ng build --prod
+    ng build --prod --build-optimizer
   displayName: 'npm install and build'
+
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'dist'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'quotesPipelineArtifact'
+    publishLocation: 'pipeline'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
