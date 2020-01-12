@@ -1,12 +1,12 @@
 {
   "name": "quotes",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test --watch=false --codeCoverage=true",
-    "lint": "ng lint",
+    "lint": "ng lint --  --format=stylish",
     "e2e": "ng e2e --port 4300 --no-webdriver-update",
     "wdm-update": "sudo webdriver-manager update",
     "wdm-start": "webdriver-manager start",

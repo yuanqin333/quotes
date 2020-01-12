@@ -3,7 +3,7 @@ import { QuoteService } from '../service/Quote.service';
 import { QuoteModel } from '../model/QuoteModel';
 
 @Component({
-  selector: 'app-Quotes',
+  selector: 'app-quotes',
   templateUrl: './Quotes.component.html',
   styleUrls: ['./Quotes.component.css']
 })
