@@ -48,7 +48,7 @@ steps:
   #condition: succeededOrFailed()
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: 'junit/TEST-*.xml'
     testRunTitle: 'Quotes Unit Test'
 
 - task: PublishCodeCoverageResults@1
