@@ -24,6 +24,10 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
+    ng lint --  --format=stylish
+  displayName: 'code lint'
+
+- script: |
     ng test --watch=false --codeCoverage=true
   displayName: 'unit test & code coverage'
 
@@ -34,18 +38,31 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
-- task: PublishPipelineArtifact@1
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifact: 'quotesPipelineArtifact'
-    publishLocation: 'pipeline'
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+    testRunTitle: 'Quotes Unit Test'
+
+- task: PublishCodeCoverageResults@1
+  condition: succeededOrFailed()
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
+  displayName: 'Publish Code Coverage Results'
+
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    rootFolderOrFile: 'dist'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
-
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'quotesPipelineArtifact'
+    publishLocation: 'pipeline'
