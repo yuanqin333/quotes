@@ -33,10 +33,10 @@ steps:
 #  condition: succeededOrFailed()
 #  displayName: 'code lint'
 
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run lint --  --format=stylish'
+#- task: Npm@1
+#  inputs:
+#    command: 'custom'
+#    customCommand: 'run lint --  --format=stylish'
 
 - task: PublishBuildArtifacts@1
   inputs:
@@ -56,6 +56,7 @@ steps:
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
+    failIfCoverageEmpty: false
   displayName: 'Publish Code Coverage Results'
 
 - task: ArchiveFiles@2
