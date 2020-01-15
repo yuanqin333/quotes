@@ -13,7 +13,7 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
-    npm audit fix
+    npm audit fix --prod
     ng config -g cli.warnings.versionMismatch false
     ng build --prod --build-optimizer
   displayName: 'npm install and build'
@@ -43,7 +43,7 @@ steps:
 #   #condition: succeededOrFailed()
 #   inputs:
 #     testResultsFormat: 'JUnit'
-#     testResultsFiles: '**/TEST-*.xml'
+#     testResultsFiles: 'junit/TEST*-*.xml'
 #     testRunTitle: 'Quotes Unit Test'
 
 # - task: PublishCodeCoverageResults@1
